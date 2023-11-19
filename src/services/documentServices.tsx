@@ -1,11 +1,15 @@
 import { db } from "@config/firebase";
-import firebase from "firebase";
+import { collection, addDoc, doc, serverTimestamp } from "firebase/firestore";
+//import firebase from "firebase";
 
 export const createDocument = (filename: string, email: string) => {
   if (filename == "" || email == "") return;
 
-  db.collection("userDocs").doc(email).collection("docs").add({
+  const userDocRef = doc(db, "userDocs", email);
+  const docsColRef = collection(userDocRef, "docs");
+
+  addDoc(docsColRef, {
     filename,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    timestamp: serverTimestamp(),
   });
 };

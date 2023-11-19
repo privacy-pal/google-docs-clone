@@ -5,26 +5,46 @@ import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useDocumentOnce } from "react-firebase-hooks/firestore";
+import React, { useState, useEffect } from 'react';
+import { doc, getDoc, DocumentSnapshot } from 'firebase/firestore';
 
 interface DocProps {}
 
 const Doc: React.FC<DocProps> = () => {
   const session = useSession();
-
   const router = useRouter();
   const { id } = router.query;
 
-  const [snapshot, loading] = useDocumentOnce(
-    db
-      .collection("userDocs")
-      .doc(session?.data?.user?.email as string)
-      .collection("docs")
-      .doc(id as string)
-  );
+  const [snapshot, setSnapshot] = useState<DocumentSnapshot | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDocument = async () => {
+      const userEmail = session?.data?.user?.email as string;
+      const docId = id as string;
+
+      if (!userEmail || !docId) {
+        setLoading(false);
+        return;
+      }
+
+      const docRef = doc(db, "userDocs", userEmail, "docs", docId);
+      try {
+        const docSnap = await getDoc(docRef);
+        setSnapshot(docSnap);
+      } catch (error) {
+        console.error('Error fetching document:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDocument();
+  }, [session, id]);
 
   if (!loading && !snapshot?.data()?.filename) {
     router.replace("/");
+    return null;
   }
 
   return (
