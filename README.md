@@ -37,6 +37,8 @@ Here is a working live demo [here](https://google-docs-clone-martstech.vercel.ap
 - Autosave
 - Authentication
 - Responsive Design
+- **(Privacy Pal) Personal Data Access**
+- **(Privacy Pal) Personal Data Deletion**
 
 ---
 
