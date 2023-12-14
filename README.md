@@ -3,7 +3,7 @@
       <img width="100px" src="https://cdn.worldvectorlogo.com/logos/google-docs-icon-2.svg" alt="Google Docs Logo" />
   </a>
   <br />
-  Google Docs Clone
+  Google Docs Clone - Privacy Pal
   <br />
 </h1>
 
