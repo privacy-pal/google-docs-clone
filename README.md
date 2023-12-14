@@ -8,22 +8,13 @@
 </h1>
 
 <h4 align="center">
-   Google Docs Clone created with Next.JS</a>.
+   Google Docs Clone powered by Privacy Pal</a>.
 </h4>
-
-<p align="center">
-   <img src="https://img.shields.io/github/v/release/MartsTech/google-docs-clone" alt="Release" />
-   <img src="https://vercelbadge.vercel.app/api/MartsTech/google-docs-clone" alt="Deployment" />
-   <img src="https://img.shields.io/github/license/MartsTech/google-docs-clone" alt="License" />
-</p>
 
 <p align="center">
   <a href="#demo">Demo</a> •
   <a href="#key-features">Key Features</a> •
-  <a href="#key-technologies">Key Technologies</a> •
   <a href="#setup">Setup</a> •
-  <a href="#support">Support</a> •
-  <a href="#license">License</a>
 </p>
 
 ![Text Editor Screenshot](public/screenshots/editor.PNG?raw=true "Text Editor Screenshot")
