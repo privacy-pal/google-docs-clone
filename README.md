@@ -47,4 +47,6 @@ Here is a working live demo [here](https://google-docs-clone-martstech.vercel.ap
 Clone this repo to your desktop and run `yarn install` to install all the dependencies.
 Then run `yarn dev` to start the application locally
 
+In another terminal, configure the connection to your Firestore database and start the server by running `yarn dev`
+
 Change the .env.example file to .env.local and fill the empty fields
