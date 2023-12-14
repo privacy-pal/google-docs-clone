@@ -1,11 +1,12 @@
-import firebase from "firebase";
+//import firebase from "firebase";
+import { DocumentSnapshot, DocumentData } from "firebase/firestore";
 import EditorHeader from "./EditorHeader";
 import TextEditor from "./TextEditor";
 
 interface EditorPageProps {
   snapshot:
-    | firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
-    | undefined;
+    | DocumentSnapshot<DocumentData>
+    | null;
 }
 
 const EditorPage: React.FC<EditorPageProps> = ({ snapshot }) => {

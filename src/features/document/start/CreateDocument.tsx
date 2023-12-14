@@ -17,9 +17,11 @@ const CreateDocument: React.FC<CreateDocumentProps> = ({
   const session = useSession();
 
   const create = () => {
-    createDocument(input, session?.data?.user?.email || "");
-    setInput("");
-    close();
+    createDocument(input, session?.data?.user?.email || "")
+      .then(() => {
+        setInput("");
+        close();
+      })
   };
 
   return (
