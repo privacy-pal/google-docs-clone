@@ -1,15 +1,31 @@
 import { db } from "@config/firebase";
-import { collection, addDoc, doc, serverTimestamp } from "firebase/firestore";
-//import firebase from "firebase";
+import { arrayUnion, getDoc, collection, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
-export const createDocument = (filename: string, email: string) => {
+export const createDocument = async (filename: string, email: string) => {
   if (filename == "" || email == "") return;
 
-  const userDocRef = doc(db, "userDocs", email);
-  const docsColRef = collection(userDocRef, "docs");
+  const userDocsRef = collection(db, "userDocs");
 
-  addDoc(docsColRef, {
+  const newDocRef = doc(userDocsRef, email);
+
+  // add a list of document ids
+  const docSnap = await getDoc(newDocRef);
+  if (!docSnap.exists()) {
+    await setDoc(newDocRef, {
+      email: email,
+      docIds: [],
+    });
+  }
+
+  const docsColRef = collection(newDocRef, "docs");
+  const newSubDocRef = doc(docsColRef);
+
+  await setDoc(newSubDocRef, {
     filename,
     timestamp: serverTimestamp(),
+  });
+
+  await updateDoc(newDocRef, {
+    docIds: arrayUnion(newSubDocRef.id),
   });
 };
